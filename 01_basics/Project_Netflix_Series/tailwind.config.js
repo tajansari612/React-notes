@@ -6,7 +6,10 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    fontFamily:{
+      'Courier' : ["Courier Prime", "monospace"],
+      'poppins' : ["Poppins", 'sans-serif']
+    },
   },
   plugins: [],
 }
