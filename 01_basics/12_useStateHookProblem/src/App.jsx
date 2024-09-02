@@ -15,6 +15,9 @@ function App() {
     { name: "Pravin", age: 23 },
     { name: "Shinde", age: 23 }
   ])
+
+  let usersLength = usersState.length
+  let usersAgeAvg = usersState.reduce((accu, curEle) => (accu + curEle.age),0)/usersLength
   return (
     <div className='flex flex-col items-center h-screen w-screen bg-[#212121] text-white'>
       <h1 className='text-3xl font-bold text-center my-6'>
@@ -37,6 +40,8 @@ function App() {
             return <li key={ele.index}>{ele.name} is {ele.age} years old!</li>
           })
         }
+        <li>Total users: {usersLength}</li>
+        <li>Users age average: {usersAgeAvg}</li>
       </ul>
     </div>
   )
