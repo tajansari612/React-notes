@@ -7,12 +7,6 @@ function App() {
   const [todo, settodo] = useState([])
   
 
-  // const addTodo = () => {
-  //   todo.push(newTask)
-  //   settodo(todo)
-  //   
-  // }
-
   const handleFormSubmit = (event) =>{
     event.preventDefault()
 
@@ -28,10 +22,27 @@ function App() {
 
   }
 
+  //todo date and time
+  const date = new Date();
+  const [time, settime] = useState('')
+  setTimeout(() =>{
+    settime(date.toLocaleTimeString())
+    console.log(time)
+  },1000)
+  
+  // console.log(date)
+
+
   return (
-    <section id="todo-container" className="bg-gray-600 w-full h-full flex flex-col items-center py-7">
-      <header className="mb-6">
+    <section id="todo-container" className="bg-gray-600 w-full h-screen flex flex-col items-center py-7">
+      <header className="mb-6 text-center">
         <h1 className="text-white text-4xl font-semibold">Todo List</h1>
+        <h2 id="date-time" className="text-white mt-6 text-2xl font-semibold">
+          <span id="date" className="">
+            {date.toLocaleDateString()}
+          </span>
+          <span id="time"> - {time}</span>
+        </h2>
       </header>
       <section className="todo-form">
 
