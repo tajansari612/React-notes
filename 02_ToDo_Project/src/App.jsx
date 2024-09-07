@@ -2,9 +2,10 @@ import { useState } from "react"
 import TodoForm from "../components/TodoForm";
 import TaskList from "../components/TaskList";
 import DateAndTime from "../components/DateAndTime";
+import { setLocalStorageData, getLocalStorageData } from "../components/TodoLoacalStorage";
 
 function App() {
-  const [todo, settodo] = useState([])
+  const [todo, settodo] = useState(() =>(getLocalStorageData()))
 
 
 
@@ -14,7 +15,7 @@ function App() {
   }
 
   //storing data in local storage
-  localStorage.setItem('react-todo',JSON.stringify(todo))
+  setLocalStorageData(todo)
 
   return (
     <section id="todo-container" className="bg-gray-600 w-full h-screen flex flex-col items-center py-7 transition-all delay-300">
