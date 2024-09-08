@@ -28,10 +28,10 @@ export default function TaskList(props) {
 
 
   return (
-    <li key={props.currEle} className="bg-yellow-400 mb-4 text-white py-2 px-4 rounded-md flex flex-row justify-end">
+    <li key={props.currEle} className="bg-gray-50 text-black mb-3 py-2 px-4 rounded-md flex flex-row justify-end">
       <span className={`w-full text-wrap ${props.currEle.checked ? 'line-through' : 'decoration-none'}`}>{props.currEle.value}</span>
-      <button id="check-btn" className='mr-2' value={props.currEle.checked} onClick={handleCheck}><BiCheckCircle /></button>
-      <button id="delete-btn" onClick={() => (handleDeleteTask(props.currEle))}><MdDeleteForever /></button>
+      <button id="check-btn" className='mr-2 text-2xl text-green-600' value={props.currEle.checked} onClick={handleCheck}><BiCheckCircle /></button>
+      <button id="delete-btn" className="text-red-600 text-2xl" onClick={() => (handleDeleteTask(props.currEle))}><MdDeleteForever /></button>
     </li>
   )
 }

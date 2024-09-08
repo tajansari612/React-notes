@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily:{
+      'lufga':['lufga-regular']
+    }
   },
   plugins: [],
 }

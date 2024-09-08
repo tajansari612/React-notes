@@ -18,9 +18,9 @@ function App() {
   setLocalStorageData(todo)
 
   return (
-    <section id="todo-container" className="bg-gray-600 w-full h-screen flex flex-col items-center py-7 transition-all delay-300">
+    <section id="todo-container" className="flex flex-col items-center py-7 transition-all delay-300">
       <header>
-        <h1 className="text-white text-4xl text-center font-semibold">Todo List</h1>
+        <h1 className="text-4xl text-center font-[lora] font-semibold">Todo List</h1>
         <DateAndTime />
       </header>
       <section className="todo-form">
@@ -31,7 +31,7 @@ function App() {
               return <TaskList key={currEle.id} todo={todo} settodo={settodo} currEle={currEle} />
             })}
           </ul>
-          <button onClick={deleteAllTasks} className="bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-300 translate-x-full">Clear All</button>
+          <button onClick={deleteAllTasks} className="py-2 px-4 mt-4 text-sm rounded-md bg-[#DD5628] hover:bg-[#EB7A53] font-semibold text-white translate-x-full">Clear All</button>
         </section>
       </section>
     </section>
