@@ -1,9 +1,0 @@
-
-// React hooks rules:
-//01. Functions whose names start with use are called Hooks in React.
-//02. Don’t call Hooks inside loops, conditions, or nested functions.
-//03. always use Hooks at the top level of your React function, before any early returns.
-//04. Do not call Hooks after a conditional return statement.
-//05. Do not call Hooks in event handlers.
-//06. Do not call Hooks in class components.
-//07. Do not call Hooks inside functions passed to useMemo, useReducer, or useEffect. 
