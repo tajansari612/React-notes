@@ -1,10 +1,12 @@
-import Forms from '../components/Form'
+// import RegistrationForm from '../components/RegistrationForm'
+import NewRegistrationForm from '../components/NewRegistrationForm'
 
 function App() {
   
   return (
     <>
-      <Forms /> 
+      {/* <RegistrationForm />  */}  {/*old not optimized*/}
+      <NewRegistrationForm />  {/*new and optimized method*/}
     </>
   )
 }
