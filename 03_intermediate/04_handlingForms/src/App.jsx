@@ -1,6 +1,7 @@
 // import RegistrationForm from '../components/RegistrationForm'
 // import NewRegistrationForm from '../components/NewRegistrationForm'
-import LoginForm from "../components/LoginForm"
+// import LoginForm from "../components/LoginForm"
+import ContactForm from "../components/ContactForm"
 
 function App() {
   
@@ -8,7 +9,8 @@ function App() {
     <>
       {/* <RegistrationForm />  */}  {/*old not optimized*/}
       {/* <NewRegistrationForm />  new and optimized method */}
-      <LoginForm />
+      {/* <LoginForm /> */}
+      <ContactForm />
     </>
   )
 }
