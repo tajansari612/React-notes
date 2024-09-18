@@ -2,26 +2,19 @@ import { useState, useEffect } from "react"
 
 function App() {
   const [pokemon, setPokemon] = useState(null)
-  const [loading, setloading] = useState(true)
-  const [error, setError] = useState("")
 
-  // const api = "https://pokeapi.co/api/v2/pokemon/squirtle"
-  const api = "https://pokeapi.co/api/v2/pokemons/squirtle" //for error checking
+  const api = "https://pokeapi.co/api/v2/pokemon/squirtle"
 
   const fetchPokemon = () => {
     fetch(api)
       .then((res) => (
         res.json()
       ))
-      .then((data) => {
+      .then((data) => (
         setPokemon(data)
-        setloading(false)
-      })
-      .catch((error) => {
-        console.log(error)
-        setloading(false)
-        setError(error)
-      })
+      ))
+      .catch((error) => (console.log(error)
+      ))
   }
   useEffect(() => {
     fetchPokemon()
@@ -30,18 +23,10 @@ function App() {
   console.log(pokemon);
 
 
-  if (loading) {
+  if (!pokemon) {
     return (
       <div>
         <h1>Loading...</h1>
-      </div>
-    )
-  }
-
-  if(error){
-    return(
-      <div>
-        <h1>Error: {error.meassage}</h1>
       </div>
     )
   }
