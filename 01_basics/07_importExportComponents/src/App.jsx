@@ -85,7 +85,7 @@ function App() {
           <Stud />
         </div>
       </div>
-    </>
+    </>  //React fragment <></> is used to eliminate the extra unnecessary div element
   )
 }
 
