@@ -4,35 +4,42 @@ import { MdDeleteForever } from "react-icons/md";
 
 function App() {
   const [time, setTime] = useState(new Date());
-  const [taskList, setTaskList] = useState(['Apple','Banana','Peach']);
+  const [taskList, setTaskList] = useState([{key:1,value:"Apple"},{key:2,value:"Banana"},{key:3,value:"Kiwi"}]);
+  const [taskId, setTaskId] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setTime(new Date());
     }, 1000);
+
+    return () => clearInterval(timer);
   },[]);
 
   const addTask = useCallback(() => {
     let addTaskData  = document.querySelector('#addTaskData').value;
-    setTaskList(prevTaskList => [...prevTaskList,addTaskData]);
+    if(addTaskData==="") return;
+    
+    const newTask = {key: taskId,value: addTaskData}
+    setTaskList(prevTaskList => [...prevTaskList,newTask]);
+    setTaskId(prev => prev+1);
 
     document.querySelector('#addTaskData').value = "";
-  },[taskList])
+  },[taskId])
 
-  const markAsRead = useCallback((index) => {
-    const element = document.querySelector('#task-'+index);
+  const markAsRead = useCallback((taskId) => {
+    const element = document.querySelector('#task-'+taskId);
     const prevClassData = element.getAttribute('class');
     element.setAttribute('class',prevClassData+' line-through');    
-  },[taskList]);
+  },[]);
 
-  const deleteTask = useCallback((index) => {
-    const newTaskList = taskList.filter((_,i) => i!=index);
-    setTaskList(newTaskList);    
+  const deleteTask = useCallback((taskId) => {
+    const newTaskList = taskList.filter((task) => task.key !==taskId);
+    setTaskList(newTaskList);
   },[taskList]);
 
   const clearAll = useCallback(() => {
     setTaskList([]);
-  },[taskList]);
+  },[]);
 
   return (
     <div 
@@ -66,16 +73,16 @@ function App() {
             className='w-full h-64 p-6 flex flex-col items-center gap-2 overflow-auto'
             >
             {
-              taskList.map((task, index) => {
+              taskList.map((task) => {
                 return(
                   <li 
-                    key={index}
-                    id={`task-${index}`}
+                    key={task.key}
+                    id={`task-${task.key}`}
                     className='w-full py-2 px-3 bg-gray-50 text-gray-700 rounded-full flex justify-center gap-2'
                     >
-                    <h2 className='w-4/5'>{task}</h2>
-                    <FaCheckCircle className='mt-0.5 text-green-500' onClick={() => markAsRead(index)} size={24} />
-                    <MdDeleteForever className='text-red-500' onClick={() => deleteTask(index)} size={28} />
+                    <h2 className='w-4/5'>{task.value}</h2>
+                    <FaCheckCircle className='mt-0.5 text-green-500' onClick={() => markAsRead(task.key)} size={24} />
+                    <MdDeleteForever className='text-red-500' onClick={() => deleteTask(task.key)} size={28} />
                   </li>
                 )
               })
