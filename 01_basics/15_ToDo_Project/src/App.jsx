@@ -3,8 +3,14 @@ import { FaCheckCircle } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 
 function App() {
+  const todoKey = "reactTodo";
   const [time, setTime] = useState(new Date());
-  const [taskList, setTaskList] = useState([{key:1,value:"Apple"},{key:2,value:"Banana"},{key:3,value:"Kiwi"}]);
+  const [taskList, setTaskList] = useState(() =>{
+    const localTodo = localStorage.getItem(todoKey);
+    if(!localTodo) return [];
+    
+    return JSON.parse(localTodo);
+  });
   const [taskId, setTaskId] = useState(0);
 
   useEffect(() => {
@@ -19,7 +25,7 @@ function App() {
     let addTaskData  = document.querySelector('#addTaskData').value;
     if(addTaskData==="") return;
     
-    const newTask = {key: taskId,value: addTaskData}
+    const newTask = {key: taskId,value: addTaskData, isCompeleted: false}
     setTaskList(prevTaskList => [...prevTaskList,newTask]);
     setTaskId(prev => prev+1);
 
@@ -27,10 +33,12 @@ function App() {
   },[taskId])
 
   const markAsRead = useCallback((taskId) => {
-    const element = document.querySelector('#task-'+taskId);
-    const prevClassData = element.getAttribute('class');
-    element.setAttribute('class',prevClassData+' line-through');    
-  },[]);
+    taskList.forEach(task => {
+      if(task.key == taskId){
+        task.isCompeleted=!task.isCompeleted;
+      }
+    });
+  },[taskList]);
 
   const deleteTask = useCallback((taskId) => {
     const newTaskList = taskList.filter((task) => task.key !==taskId);
@@ -40,6 +48,10 @@ function App() {
   const clearAll = useCallback(() => {
     setTaskList([]);
   },[]);
+
+  useEffect(() =>{
+    localStorage.setItem(todoKey,JSON.stringify(taskList));
+  },[taskList]);
 
   return (
     <div 
@@ -78,7 +90,7 @@ function App() {
                   <li 
                     key={task.key}
                     id={`task-${task.key}`}
-                    className='w-full py-2 px-3 bg-gray-50 text-gray-700 rounded-full flex justify-center gap-2'
+                    className={`w-full py-2 px-3 bg-gray-50 text-gray-700 rounded-full flex justify-center gap-2 ${task.isCompeleted?'line-through':''}`}
                     >
                     <h2 className='w-4/5'>{task.value}</h2>
                     <FaCheckCircle className='mt-0.5 text-green-500' onClick={() => markAsRead(task.key)} size={24} />
